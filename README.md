@@ -1,4 +1,8 @@
-# Getting Started 
+# React Coctails
+
+Live Demo: https://ann-kilzer.github.io/react-cocktails/ 🍸
+
+## Getting Started 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
