@@ -1,11 +1,12 @@
 import React from 'react';
 import './App.css';
+import RandomCocktail from './components/RandomCocktail'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Random Cocktail</h1>
+        <RandomCocktail />
       </header>
     </div>
   );
