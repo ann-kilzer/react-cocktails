@@ -6,7 +6,7 @@ export interface ingredient {
 interface recipeProps {
   name: string;
   glass: string;
-  instructions: Array<string>;
+  instructions: string;
   ingredients: Array<ingredient>;
 }
 
@@ -18,15 +18,10 @@ export const CocktailRecipe: React.FC<recipeProps> = ({
 }) => {
   const ingredientTable = ingredients.map((item) =>
     <tr key={item.name}>
-      <td>{item.name}</td>
       <td>{item.amount}</td>
+      <td>{item.name}</td>
     </tr>
   );
-
-  const instructionList = instructions.map((item) =>
-    <li>{item}</li>
-  );
-
 
   return (
     <div>
@@ -35,7 +30,7 @@ export const CocktailRecipe: React.FC<recipeProps> = ({
       <h3>Ingredients</h3>
       <table><tbody>{ingredientTable}</tbody></table>
       <h3>Instructions</h3>
-      <ol>{instructionList}</ol>
+      <span>{instructions}</span>
     </div>
   );
 };

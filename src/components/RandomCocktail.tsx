@@ -5,17 +5,11 @@ import { AxiosRequestConfig } from "axios";
 import { CocktailRecipe, ingredient } from "./CocktailRecipe";
 
 export default function RandomCocktail(props: any) {
-  const [name, setName] = useState<string>("Gin and Tonic");
-  const [glass, setGlass] = useState<string>("Highball");
-  const [instructions, setInstructions] = useState<Array<string>>(['step 1', 'step 2']);
+  const [name, setName] = useState<string>("");
+  const [glass, setGlass] = useState<string>("");
+  const [instructions, setInstructions] = useState<string>("");
   const [ingredients, setIngredients] = useState<Array<ingredient>>([]);
-
-  useEffect(() => {
-    const gin = { name: 'gin', amount: '1 oz' }
-    const tonic = { name: 'tonic', amount: '2 oz' }
-    const lime = { name: 'lime', amount: '1 slice' }
-    setIngredients([gin, tonic, lime]);
-  }, [setIngredients])
+  const MAX_STEPS = 15;
 
   useEffect(() => {
     const options: AxiosRequestConfig = {
@@ -28,7 +22,24 @@ export default function RandomCocktail(props: any) {
     };
 
     axios.request(options).then(function (response) {
-      console.log(response.data);
+      const drink = response.data.drinks[0];
+      console.log(drink);
+      setName(drink.strDrink);
+      setGlass(drink.strGlass);
+      setInstructions(drink.strInstructions);
+
+      let ingredients = Array<ingredient>();
+      let i:number = 1
+      for(i=1; i<=MAX_STEPS; i++) {
+        const item = drink[`strIngredient${i}`]
+        const measure = drink[`strMeasure${i}`]
+        if (item || measure) {
+          ingredients.push({name: item || '', amount: measure || ''})
+        } else {
+          break;
+        }
+      }
+      setIngredients(ingredients);
 
     }).catch(function (error) {
       console.error(error);
