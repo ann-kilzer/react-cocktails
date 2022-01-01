@@ -16,14 +16,14 @@ export const CocktailRecipe: React.FC<recipeProps> = ({
   instructions,
   ingredients,
 }) => {
-    const ingredientTable = ingredients.map((item) =>
+  const ingredientTable = ingredients.map((item) =>
     <tr key={item.name}>
       <td>{item.name}</td>
       <td>{item.amount}</td>
     </tr>
   );
 
-  const instructionList = instructions.map((item) => 
+  const instructionList = instructions.map((item) =>
     <li>{item}</li>
   );
 
@@ -33,7 +33,7 @@ export const CocktailRecipe: React.FC<recipeProps> = ({
       <h1>{name}</h1>
       <h2>Glass: {glass}</h2>
       <h3>Ingredients</h3>
-      <table>{ingredientTable}</table>
+      <table><tbody>{ingredientTable}</tbody></table>
       <h3>Instructions</h3>
       <ol>{instructionList}</ol>
     </div>

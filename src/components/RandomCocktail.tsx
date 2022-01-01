@@ -11,28 +11,29 @@ export default function RandomCocktail(props: any) {
   const [ingredients, setIngredients] = useState<Array<ingredient>>([]);
 
   useEffect(() => {
-      const gin = {name: 'gin', amount: '1 oz'}
-      const tonic = {name: 'tonic', amount: '2 oz'}
-      const lime = {name: 'lime', amount: '1 slice'}
-      setIngredients([gin, tonic, lime]);
+    const gin = { name: 'gin', amount: '1 oz' }
+    const tonic = { name: 'tonic', amount: '2 oz' }
+    const lime = { name: 'lime', amount: '1 slice' }
+    setIngredients([gin, tonic, lime]);
   }, [setIngredients])
 
-  /*useEffect(() => {
-        const options =        {
-            method: 'GET',
-            url: 'https://the-cocktail-db.p.rapidapi.com/random.php',
-            headers: {
-              'x-rapidapi-host': 'the-cocktail-db.p.rapidapi.com',
-              'x-rapidapi-key': 'INJECT THIS'
-            }
-          };
+  useEffect(() => {
+    const options: AxiosRequestConfig = {
+      method: 'GET',
+      url: 'https://the-cocktail-db.p.rapidapi.com/random.php',
+      headers: {
+        'x-rapidapi-host': process.env.REACT_APP_RAPIDAPI_HOST || '',
+        'x-rapidapi-key': process.env.REACT_APP_RAPIDAPI_KEY || ''
+      }
+    };
 
-        axios.request(options).then(function (response) {
-            console.log(response.data);
-        }).catch(function (error) {
-            console.error(error);
-        });
-    });*/
+    axios.request(options).then(function (response) {
+      console.log(response.data);
+
+    }).catch(function (error) {
+      console.error(error);
+    });
+  }, []);
 
   return (
     <CocktailRecipe
